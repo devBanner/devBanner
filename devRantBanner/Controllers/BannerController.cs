@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using devRantBanner.Logic;
+using devBanner.Logic;
 using devRant.NET;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 
-namespace devRantBanner.Controllers
+namespace devBanner.Controllers
 {
     [Route("api/[controller]")]
     public class BannerController : Controller

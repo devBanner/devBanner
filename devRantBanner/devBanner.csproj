@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>devBanner</AssemblyName>
+    <RootNamespace>devBanner</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

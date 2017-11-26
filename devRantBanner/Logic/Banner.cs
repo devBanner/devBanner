@@ -11,7 +11,7 @@ using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.Primitives;
 
-namespace devRantBanner.Logic
+namespace devBanner.Logic
 {
     public class Banner
     {
