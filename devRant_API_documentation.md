@@ -109,5 +109,5 @@ Fail:
 
 # Conclusions
 For this project is useful to:
-1. Get UserID by the Username input
+1. Get UserID by the Username input.
 2. Get the Profile by UserID, with `content=collabs` parameter (to download the shortest possible version of the profile), and then ignore everyting except the `avatar` section.
