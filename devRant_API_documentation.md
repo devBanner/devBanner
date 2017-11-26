@@ -42,7 +42,7 @@ Response:<br>
 
 **IMPORTANT**<br>
 The `content` parameter is optional.
-If it's missing or blank, the response contains the `rants` section with the `USER_ARRAY_OF_RANTS`, `upvoted` section with the `USER_ARRAY_OF_UPVOTED`, `comments` section with the `USER_ARRAY_OF_COMMENTS`, `favorites` section with the `USER_ARRAY_OF_FAVORITES` and the `collabs` section is **MISSING**.
+If it's missing or blank, the response contains the `rants` section with the `USER_ARRAY_OF_RANTS`, `upvoted` section with the `USER_ARRAY_OF_UPVOTED`, `comments` section with the `USER_ARRAY_OF_COMMENTS`, `favorites` section with the `USER_ARRAY_OF_FAVORITES` and the `collabs` section **IS MISSING**.
 
 All the `collabs` are already present in the `USER_ARRAY_OF_RANTS`, so the `collabs` section is useful if you don't need the rest of rants. 
 
@@ -90,7 +90,8 @@ Success:<br>
                       },
             "avatar":{
                       "b":"USER_AVATAR_HEX_COLOR",
-                      "i":"USER_AVATAR_IMAGE_URL"},
+                      "i":"USER_AVATAR_IMAGE_URL"
+                      },
             "avatar_sm":{
                          "b":"USER_AVATAR_HEX_COLOR",
                          "i":"USER_SMALL_AVATAR_IMAGE_URL"
