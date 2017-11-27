@@ -28,7 +28,7 @@ namespace devBanner.Controllers
             // Avatar base url + avatar meta = rendered avatar url
             var avatarPath = $"{this.DevrantAvatarBaseURL}/{avatar.Image}";
 
-            var banner = Banner.Generate(avatarPath, avatar.Background, userProfile.Username, (String.IsNullOrEmpty(subtext) ? userProfile.About : subtext));
+            var banner = Banner.Generate(avatarPath, userProfile, (String.IsNullOrEmpty(subtext) ? userProfile.About : subtext));
 
             return base.PhysicalFile(banner, "image/png");
         }

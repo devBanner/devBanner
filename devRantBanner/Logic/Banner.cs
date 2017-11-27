@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using devRant.NET;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing;
@@ -36,10 +37,10 @@ namespace devBanner.Logic
             return Enum.Parse<AvatarMetaColors>(backgroundNum);
         }
 
-        public static string Generate(string avatarURL, string avatarBGColor, string username, string subtext)
+        public static string Generate(string avatarURL, Profile profile, string subtext)
         {
             var workingDir = Directory.GetCurrentDirectory();
-            var outputPath = $"{workingDir}/generated/{username}.png";
+            var outputPath = $"{workingDir}/generated/{profile.Username}.png";
 
             // Download rendered avatar
             var httpClient = new HttpClient();
@@ -82,13 +83,13 @@ namespace devBanner.Logic
                 var devrantTarget = new Point(devrantTargetX, devrantTargetY);
 
                 // Draw background
-                banner.Mutate(i => i.BackgroundColor(Rgba32.FromHex(avatarBGColor)));
+                banner.Mutate(i => i.BackgroundColor(Rgba32.FromHex(profile.Avatar.Background)));
 
                 // Draw avatar
                 banner.Mutate(i => i.DrawImage(avatarImage, 1, avatarSize, avatarTarget));
 
                 // Draw username
-                banner.Mutate(i => i.DrawText(username, fontUsername, Rgba32.White, usernameTarget, new TextGraphicsOptions(true)
+                banner.Mutate(i => i.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget, new TextGraphicsOptions(true)
                 {
                     HorizontalAlignment = HorizontalAlignment.Left,
                     VerticalAlignment = VerticalAlignment.Center
