@@ -15,27 +15,7 @@ using SixLabors.Primitives;
 namespace devBanner.Logic
 {
     public class Banner
-    {
-        private enum AvatarMetaColors
-        {
-            Green = 1,
-            Purple = 2,
-            Orange = 3,
-            Blue = 4,
-            Red = 5,
-            LightBlue = 6,
-            Yellow = 7
-        }
-
-        private AvatarMetaColors BackgroundColorResolver(string meta)
-        {
-            // v-18_c-12_g-m_b-7
-            // Different parameters are splitted by an underscore
-            // Left side of dash defines parameter
-            // Right side defines value
-            var backgroundNum = Regex.Matches(meta, @"b-(\d+?)", RegexOptions.Compiled & RegexOptions.IgnoreCase).First().Groups[1].Value;
-            return Enum.Parse<AvatarMetaColors>(backgroundNum);
-        }
+    { 
 
         public static string Generate(string avatarURL, Profile profile, string subtext)
         {
