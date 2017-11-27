@@ -16,6 +16,7 @@ namespace devBanner.Controllers
 
         // GET banner/get
         [HttpGet()]
+        [HttpPost()]
         public FileResult Get(string username, string subtext)
         {
             // Convert username to userID
