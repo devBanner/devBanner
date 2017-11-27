@@ -1,5 +1,5 @@
 
-# devBanner
+# devBanner [![Gitter chat](https://badges.gitter.im/gitterHQ/services.png)](https://gitter.im/devBanner/Lobby)
 Banner creation with devRant avatar and username
 
 ## Milestone
