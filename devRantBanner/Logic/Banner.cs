@@ -63,31 +63,19 @@ namespace devBanner.Logic
                 var devrantTarget = new Point(devrantTargetX, devrantTargetY);
 
                 // Draw background
-                banner.Mutate(i => i.BackgroundColor(Rgba32.FromHex(profile.Avatar.Background)));
+                banner.SetBGColor(Rgba32.FromHex(profile.Avatar.Background));
 
                 // Draw avatar
-                banner.Mutate(i => i.DrawImage(avatarImage, 1, avatarSize, avatarTarget));
+                banner.DrawImage(avatarImage, avatarSize, avatarTarget);
 
                 // Draw username
-                banner.Mutate(i => i.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget, new TextGraphicsOptions(true)
-                {
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    VerticalAlignment = VerticalAlignment.Center
-                }));
+                banner.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget);
 
                 // Draw subtext
-                banner.Mutate(i => i.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget, new TextGraphicsOptions(true)
-                {
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    VerticalAlignment = VerticalAlignment.Center
-                }));
+                banner.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget);
 
                 // Draw devrant text
-                banner.Mutate(i => i.DrawText("devrant.com", fontDevrant, Rgba32.White, devrantTarget, new TextGraphicsOptions(true)
-                {
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    VerticalAlignment = VerticalAlignment.Top
-                }));
+                banner.DrawText("devrant.com", fontDevrant, Rgba32.White, devrantTarget, HorizontalAlignment.Left, VerticalAlignment.Top);
 
                 banner.Save(outputPath);
             }
