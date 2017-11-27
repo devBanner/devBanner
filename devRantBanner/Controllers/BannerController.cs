@@ -9,7 +9,7 @@ using System.Net.Http;
 
 namespace devBanner.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("generate/[controller]")]
     public class BannerController : Controller
     {
         private string DevrantAvatarBaseURL { get; set; } = "https://avatars.devrant.com";
