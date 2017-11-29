@@ -2,6 +2,9 @@
 # devBanner [![Gitter chat](https://badges.gitter.im/gitterHQ/services.png)](https://gitter.im/devBanner/Lobby)
 Banner creation with devRant avatar and username
 
+## Temporary frontend
+bashlord.com/devrant-banners
+
 ## Milestone
 ### Text render
 Encoding, font, and word wrap problems
