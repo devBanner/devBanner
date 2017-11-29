@@ -3,7 +3,7 @@
 Banner creation with devRant avatar and username
 
 ## Temporary frontend
-https://bashlord.com/devrant-banners
+http://bashlord.com/devrant-banners
 
 ## Milestone
 ### Text render
