@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using devRant.NET;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing;
@@ -14,32 +15,12 @@ using SixLabors.Primitives;
 namespace devBanner.Logic
 {
     public class Banner
-    {
-        private enum AvatarMetaColors
-        {
-            Green = 1,
-            Purple = 2,
-            Orange = 3,
-            Blue = 4,
-            Red = 5,
-            LightBlue = 6,
-            Yellow = 7
-        }
+    { 
 
-        private AvatarMetaColors BackgroundColorResolver(string meta)
-        {
-            // v-18_c-12_g-m_b-7
-            // Different parameters are splitted by an underscore
-            // Left side of dash defines parameter
-            // Right side defines value
-            var backgroundNum = Regex.Matches(meta, @"b-(\d+?)", RegexOptions.Compiled & RegexOptions.IgnoreCase).First().Groups[1].Value;
-            return Enum.Parse<AvatarMetaColors>(backgroundNum);
-        }
-
-        public static string Generate(string avatarURL, string avatarBGColor, string username, string subtext)
+        public static string Generate(string avatarURL, Profile profile, string subtext)
         {
             var workingDir = Directory.GetCurrentDirectory();
-            var outputPath = $"{workingDir}/generated/{username}.png";
+            var outputPath = $"{workingDir}/generated/{profile.Username}.png";
 
             // Download rendered avatar
             var httpClient = new HttpClient();
@@ -65,7 +46,7 @@ namespace devBanner.Logic
                 var avatarWidth = avatarHeight;
                 var avatarSize = new Size(avatarWidth, avatarHeight);
 
-                var avatarTargetX = 0;
+                var avatarTargetX = 15;
                 var avatarTargetY = 0;
                 var avatarTarget = new Point(avatarTargetX, avatarTargetY);
                 
@@ -82,31 +63,19 @@ namespace devBanner.Logic
                 var devrantTarget = new Point(devrantTargetX, devrantTargetY);
 
                 // Draw background
-                banner.Mutate(i => i.BackgroundColor(Rgba32.FromHex(avatarBGColor)));
+                banner.SetBGColor(Rgba32.FromHex(profile.Avatar.Background));
 
                 // Draw avatar
-                banner.Mutate(i => i.DrawImage(avatarImage, 1, avatarSize, avatarTarget));
+                banner.DrawImage(avatarImage, avatarSize, avatarTarget);
 
                 // Draw username
-                banner.Mutate(i => i.DrawText(username, fontUsername, Rgba32.White, usernameTarget, new TextGraphicsOptions(true)
-                {
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    VerticalAlignment = VerticalAlignment.Center
-                }));
+                banner.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget);
 
                 // Draw subtext
-                banner.Mutate(i => i.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget, new TextGraphicsOptions(true)
-                {
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    VerticalAlignment = VerticalAlignment.Center
-                }));
+                banner.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget);
 
                 // Draw devrant text
-                banner.Mutate(i => i.DrawText("devrant.com", fontDevrant, Rgba32.White, devrantTarget, new TextGraphicsOptions(true)
-                {
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    VerticalAlignment = VerticalAlignment.Top
-                }));
+                banner.DrawText("devrant.com", fontDevrant, Rgba32.White, devrantTarget, HorizontalAlignment.Left, VerticalAlignment.Top);
 
                 banner.Save(outputPath);
             }
