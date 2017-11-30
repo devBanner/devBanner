@@ -51,5 +51,47 @@ namespace devBanner.Logic
             // Create scaled font new font
             return new Font(font, scalingFactor * font.Size);
         }
+
+        public static string AddWrap(this string text, Font font, float maxWidth, int maxWraps = 5)
+        {
+            float textWidth = TextMeasurer.Measure(text, new RendererOptions(font)).Width;
+
+            if(maxWraps == 0)
+                return text;
+
+            if (textWidth < maxWidth)
+                return text;
+
+            string fittingTextLine = String.Empty;
+
+            List<string> words = text.Split(' ').ToList();
+            var addedWords = 0;
+            for (var i = 0; i < words.Count -1; i++)
+            {
+                var word = words[i];
+                var fittingTextLineWidth = TextMeasurer.Measure(fittingTextLine, new RendererOptions(font)).Width;
+                var wordWidth = TextMeasurer.Measure(word, new RendererOptions(font)).Width;
+
+                if(fittingTextLineWidth + wordWidth <= maxWidth)
+                {
+                    fittingTextLine += $" {word}";
+                    addedWords++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if(addedWords < words.Count)
+            {
+                fittingTextLine += "\n" + words.Skip(addedWords).Take(words.Count - addedWords).Aggregate((i, j) => i + " " + j).AddWrap(font, maxWidth, maxWraps -1);
+            }
+
+            // Remove first space
+            fittingTextLine = fittingTextLine.Substring(1, fittingTextLine.Length - 2);
+
+            return fittingTextLine;
+        }
     }
 }
