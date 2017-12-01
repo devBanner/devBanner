@@ -40,5 +40,16 @@ namespace devBanner.Logic
             canavas.Mutate(i => i.DrawImage(image, alpha, size, target));
             return canavas;
         }
+
+        public static Font ScaleToText(this Font font, string text, SizeF desiredSize)
+        {
+            SizeF size = TextMeasurer.Measure(text, new RendererOptions(font));
+
+            // Calculate if we need to downscale the font size to fit the banner
+            float scalingFactor = Math.Min(desiredSize.Width / size.Width, desiredSize.Height / size.Height);
+
+            // Create scaled font new font
+            return new Font(font, scalingFactor * font.Size);
+        }
     }
 }

@@ -16,7 +16,6 @@
 [Rr]elease/
 [Rr]eleases/
 [Pp]roperties/
-[Gg]enerated/
 x64/
 x86/
 bld/
@@ -261,3 +260,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# Ignore generated banners
+devRantBanner/generated/

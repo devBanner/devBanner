@@ -57,6 +57,8 @@ namespace devBanner.Logic
                 var subtextTargetX = usernameTarget.X;
                 var subtextTartgetY = usernameTarget.Y + fontSizeUsername;
                 var subtextTarget = new Point(subtextTargetX, subtextTartgetY);
+                var subTextWidth = banner.Width - subtextTargetX - 15;
+                var subTextHeight = fontSizeSubtext;
 
                 var devrantTargetX = banner.Width - 108;
                 var devrantTargetY = banner.Height - 4 - fontSizeDevrant;
@@ -70,6 +72,9 @@ namespace devBanner.Logic
 
                 // Draw username
                 banner.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget);
+
+                // Scale font size to subtext
+                fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight));
 
                 // Draw subtext
                 banner.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget);
