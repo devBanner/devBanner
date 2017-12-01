@@ -5,6 +5,9 @@ Banner creation with devRant avatar and username
 ## Temporary frontend
 http://bashlord.com/devrant-banners
 
+## Frontend concept
+https://cozyplanes.github.io/dB-UI/
+
 ## Milestone
 ### Text render
 Encoding, font, and word wrap problems
