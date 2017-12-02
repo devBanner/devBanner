@@ -5,7 +5,7 @@ Banner creation with devRant avatar and username
 ## Temporary frontend
 http://bashlord.com/devrant-banners
 
-## Frontend concept
+## Front-end concept (feedback welcome!)
 https://cozyplanes.github.io/dB-UI/
 
 ## Milestone
@@ -16,9 +16,10 @@ All text render issues should have this milestone.
 
 ## Phases
 
-- 1 : Initial code base
-- 2 : Add UI
-- 3 : 
+- 1 : Initial code base, bug fix - **current**
+- 2 : Finish Front-End alpha, bug fix **december 15-20**
+- 3 : Add parameter (resolution), bug squash
+- 4 : Wallpaper support
 
 ## Contact
 <cozyplanes@tuta.io>
