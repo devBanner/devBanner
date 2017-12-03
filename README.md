@@ -4,6 +4,9 @@ Banner creation with devRant avatar and username
 ## Current Front-end
 https://cozyplanes.github.io/devBanner_Frontend
 
+### Front-end development repo (for devs)
+https://github.com/cozyplanes/devBanner_Frontend
+
 ## Manual process
 Click the link below, and edit the params
 Add `%20` for space if necessary, `%0A` for newline (word wrap coming soon!)
