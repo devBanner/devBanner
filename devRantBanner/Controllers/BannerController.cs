@@ -17,24 +17,35 @@ namespace devBanner.Controllers
         // GET banner/get
         [HttpGet()]
         [HttpPost()]
-        public FileResult Get(string username, string subtext)
+        public object Get(string username, string subtext)
         {
-            if (subtext.Length > 56)
-                throw new ArgumentException("Subtext too long");
+            try
+            {
+                if (subtext.Length > 56)
+                    throw new ArgumentException("Subtext too long");
 
-            // Convert username to userID
-            var client = DevRantClient.Create(new HttpClient());
-            var userId = client.GetUserID(username).Result.UserId;
+                // Convert username to userID
+                var client = DevRantClient.Create(new HttpClient());
+                var userId = client.GetUserID(username).Result.UserId;
 
-            // Use the userID to retrive the meta information about the avatar
-            var userProfile = client.GetUser(userId).Result.Profile;
-            var avatar = userProfile.Avatar;
-            // Avatar base url + avatar meta = rendered avatar url
-            var avatarPath = $"{this.DevrantAvatarBaseURL}/{avatar.Image}";
+                // Use the userID to retrive the meta information about the avatar
+                var userProfile = client.GetUser(userId).Result.Profile;
+                var avatar = userProfile.Avatar;
+                // Avatar base url + avatar meta = rendered avatar url
+                var avatarPath = $"{this.DevrantAvatarBaseURL}/{avatar.Image}";
 
-            var banner = Banner.Generate(avatarPath, userProfile, (String.IsNullOrEmpty(subtext) ? userProfile.About : subtext));
+                var banner = Banner.Generate(avatarPath, userProfile, (String.IsNullOrEmpty(subtext) ? userProfile.About : subtext));
 
-            return base.PhysicalFile(banner, "image/png");
+                return base.PhysicalFile(banner, "image/png");
+            }
+            catch (ArgumentException)
+            {
+                return "Subtext exceeds max subtext lenght (56 chars)";
+            }
+            catch
+            {
+                return "Couldn't create banner. (Wrong username?)";
+            }
         }
     }
 }
