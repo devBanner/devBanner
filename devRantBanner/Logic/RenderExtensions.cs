@@ -57,7 +57,7 @@ namespace devBanner.Logic
             float textWidth = TextMeasurer.Measure(text, new RendererOptions(font)).Width;
 
             if(maxWraps == 0)
-                return text;
+                return $"{text.Substring(0, (int)maxWidth - 3)}...";
 
             if (textWidth < maxWidth)
                 return text;
