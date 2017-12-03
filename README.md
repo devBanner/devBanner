@@ -41,3 +41,6 @@ https://devbanner.center/generate/banner?username=yourusernamehere&subtext=Your%
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
+
+#### Other implementations by devRant users
+https://gist.github.com/alberto98fx/f90d29cfaf8013aa0de44e7dbe6e6fef - JS with Canvas
