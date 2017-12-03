@@ -2,7 +2,13 @@
 # devBanner [![Gitter chat](https://badges.gitter.im/gitterHQ/services.png)](https://gitter.im/devBanner/Lobby)
 Banner creation with devRant avatar and username
 
+## How to get your banner
+Click the link below, and edit the params
+Add `%20` for space if necessary
+https://devbanner.center/generate/banner?username=cozyplanes&subtext=Your%20subtext%20here
+
 ## Temporary frontend
+**SECURITY ALERT: DO NOT USE THE FRONTEND. THERE IS A XSS VULNERABILITY** 
 http://bashlord.com/devrant-banners
 
 ## Front-end concept (feedback welcome!)
