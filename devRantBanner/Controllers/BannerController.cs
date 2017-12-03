@@ -19,6 +19,9 @@ namespace devBanner.Controllers
         [HttpPost()]
         public FileResult Get(string username, string subtext)
         {
+            if (subtext.Length > 56)
+                throw new ArgumentException("Subtext too long");
+
             // Convert username to userID
             var client = DevRantClient.Create(new HttpClient());
             var userId = client.GetUserID(username).Result.UserId;
