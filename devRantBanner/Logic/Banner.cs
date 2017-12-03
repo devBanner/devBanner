@@ -77,7 +77,7 @@ namespace devBanner.Logic
                 fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight));
 
                 // Draw subtext
-                banner.DrawText(, fontSubtext, Rgba32.White, subtextTarget);
+                banner.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget);
 
                 // Draw devrant text
                 banner.DrawText("devrant.com", fontDevrant, Rgba32.White, devrantTarget, HorizontalAlignment.Left, VerticalAlignment.Top);
