@@ -1,17 +1,21 @@
 
+# Frontend available (temporary) https://cozyplanes.github.io/devBanner
+****
 # devBanner [![Gitter chat](https://badges.gitter.im/gitterHQ/services.png)](https://gitter.im/devBanner/Lobby)
 Banner creation with devRant avatar and username
 
-## How to get your banner
+
+
+## Manual download
 Click the link below, and edit the params
 Add `%20` for space if necessary
 https://devbanner.center/generate/banner?username=cozyplanes&subtext=Your%20subtext%20here
 
 ## Temporary frontend
-**SECURITY ALERT: DO NOT USE THE FRONTEND. THERE IS A XSS VULNERABILITY** 
+**SECURITY ALERT: DO NOT USE THE FRONTEND BELOW. THERE IS A XSS VULNERABILITY. USE AT YOUR OWN RISK** 
 http://bashlord.com/devrant-banners
 
-## Front-end concept (feedback welcome!)
+## Front-end concept (feedback welcome!), DISCONTINUED
 https://cozyplanes.github.io/dB-UI/
 
 ## Milestone
