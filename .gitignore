@@ -263,3 +263,6 @@ __pycache__/
 
 # Ignore generated banners
 devRantBanner/generated/
+
+# Ignore avatars
+devRantBanner/avatars/
