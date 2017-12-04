@@ -32,83 +32,102 @@ namespace devBanner.Logic
             var avatarURL = $"{DevrantAvatarBaseURL}/{profile.Avatar.Image}";
 
             const string outputDir = "generated";
+            const string avatarsDir = "avatars";
+
+            var outputFileName = $"{profile.Username}.png";
 
             var workingDir = Directory.GetCurrentDirectory();
             var outputPath = Path.Combine(workingDir, outputDir);
 
+            var avatarPath = Path.Combine(workingDir, avatarsDir);
+
             Directory.CreateDirectory(outputPath);
+            Directory.CreateDirectory(avatarPath);
 
-            var outputFile = Path.Combine(outputPath, $"{profile.Username}.png");
+            var avatarFile = Path.Combine(avatarPath, outputFileName);
+            var outputFile = Path.Combine(outputPath, outputFileName);
 
-            // Download rendered avatar
-            var httpClient = new HttpClient();
+            byte[] data;
 
-            using (var response = await httpClient.GetAsync(avatarURL))
+            if (File.Exists(avatarFile))
             {
-                if (response.StatusCode == HttpStatusCode.NotFound)
+                data = await File.ReadAllBytesAsync(avatarFile);
+            }
+            else
+            {
+                // Download rendered avatar
+                var httpClient = new HttpClient();
+
+                using (var response = await httpClient.GetAsync(avatarURL))
                 {
-                    throw new AvatarNotFoundException(profile.Username);
+                    if (response.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        throw new AvatarNotFoundException(profile.Username);
+                    }
+
+                    response.EnsureSuccessStatusCode();
+
+                    data = await response.Content.ReadAsByteArrayAsync();
+
+                    await File.WriteAllBytesAsync(avatarFile, data);
                 }
+            }
 
-                response.EnsureSuccessStatusCode();
+            using (var avatarImage = Image.Load(data))
+            using (var banner = new Image<Rgba32>(800, 192))
+            {
+                var fontCollection = new FontCollection();
+                fontCollection.Install("fonts/Comfortaa-Regular.ttf");
 
-                using (var responseStream = await response.Content.ReadAsStreamAsync())
-                using (var avatarImage = Image.Load(responseStream))
-                using (var banner = new Image<Rgba32>(800, 192))
-                {
-                    var fontCollection = new FontCollection();
-                    fontCollection.Install("fonts/Comfortaa-Regular.ttf");
+                var fontSizeUsername = 64;
+                var fontSizeSubtext = fontSizeUsername / 2;
+                var fontSizeDevrant = 16;
 
-                    var fontSizeUsername = 64;
-                    var fontSizeSubtext = fontSizeUsername / 2;
-                    var fontSizeDevrant = 16;
+                var fontUsername = fontCollection.CreateFont("Comfortaa", fontSizeUsername, FontStyle.Bold);
+                var fontSubtext = fontCollection.CreateFont("Comfortaa", fontSizeSubtext, FontStyle.Regular);
+                var fontDevrant = fontCollection.CreateFont("Comfortaa", fontSizeDevrant, FontStyle.Regular);
 
-                    var fontUsername = fontCollection.CreateFont("Comfortaa", fontSizeUsername, FontStyle.Bold);
-                    var fontSubtext = fontCollection.CreateFont("Comfortaa", fontSizeSubtext, FontStyle.Regular);
-                    var fontDevrant = fontCollection.CreateFont("Comfortaa", fontSizeDevrant, FontStyle.Regular);
+                var avatarHeight = banner.Height;
+                var avatarWidth = avatarHeight;
+                var avatarSize = new Size(avatarWidth, avatarHeight);
 
-                    var avatarHeight = banner.Height;
-                    var avatarWidth = avatarHeight;
-                    var avatarSize = new Size(avatarWidth, avatarHeight);
+                var avatarTargetX = 15;
+                var avatarTargetY = 0;
+                var avatarTarget = new Point(avatarTargetX, avatarTargetY);
 
-                    var avatarTargetX = 15;
-                    var avatarTargetY = 0;
-                    var avatarTarget = new Point(avatarTargetX, avatarTargetY);
+                var usernameTargetX = banner.Width / 3;
+                var usernameTartgetY = banner.Height / 4;
+                var usernameTarget = new Point(usernameTargetX, usernameTartgetY);
 
-                    var usernameTargetX = banner.Width / 3;
-                    var usernameTartgetY = banner.Height / 4;
-                    var usernameTarget = new Point(usernameTargetX, usernameTartgetY);
+                var subtextTargetX = usernameTarget.X;
+                var subtextTartgetY = usernameTarget.Y + fontSizeUsername;
+                var subtextTarget = new Point(subtextTargetX, subtextTartgetY);
+                var subTextWidth = banner.Width - subtextTargetX - 15;
+                var subTextHeight = fontSizeSubtext;
 
-                    var subtextTargetX = usernameTarget.X;
-                    var subtextTartgetY = usernameTarget.Y + fontSizeUsername;
-                    var subtextTarget = new Point(subtextTargetX, subtextTartgetY);
-                    var subTextWidth = banner.Width - subtextTargetX - 15;
-                    var subTextHeight = fontSizeSubtext;
+                var devrantTargetX = banner.Width - 108;
+                var devrantTargetY = banner.Height - 4 - fontSizeDevrant;
+                var devrantTarget = new Point(devrantTargetX, devrantTargetY);
 
-                    var devrantTargetX = banner.Width - 108;
-                    var devrantTargetY = banner.Height - 4 - fontSizeDevrant;
-                    var devrantTarget = new Point(devrantTargetX, devrantTargetY);
+                // Draw background
+                banner.SetBGColor(Rgba32.FromHex(profile.Avatar.Background));
 
-                    // Draw background
-                    banner.SetBGColor(Rgba32.FromHex(profile.Avatar.Background));
+                // Draw avatar
+                banner.DrawImage(avatarImage, avatarSize, avatarTarget);
 
-                    // Draw avatar
-                    banner.DrawImage(avatarImage, avatarSize, avatarTarget);
+                // Draw username
+                banner.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget);
 
-                    // Draw username
-                    banner.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget);
+                // Scale font size to subtext
+                fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight));
 
-                    // Scale font size to subtext
-                    fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight));
+                // Draw subtext
+                banner.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget);
 
-                    // Draw subtext
-                    banner.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget);
+                // Draw devrant text
+                banner.DrawText("devrant.com", fontDevrant, Rgba32.White, devrantTarget, HorizontalAlignment.Left, VerticalAlignment.Top);
 
-                    // Draw devrant text
-                    banner.DrawText("devrant.com", fontDevrant, Rgba32.White, devrantTarget, HorizontalAlignment.Left, VerticalAlignment.Top);
-
-                    banner.Save(outputFile, new PngEncoder());
-                }
+                banner.Save(outputFile, new PngEncoder());
             }
 
             return outputFile;
