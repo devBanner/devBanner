@@ -45,7 +45,7 @@ namespace devBanner.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(500, ex.Message);
             }
 
             return PhysicalFile(banner, "image/png");
