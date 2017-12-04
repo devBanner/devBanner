@@ -6,6 +6,7 @@ using devBanner.Logic;
 using devRant.NET;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
+using devBanner.Exceptions;
 using Microsoft.Extensions.Logging;
 
 namespace devBanner.Controllers
@@ -55,6 +56,10 @@ namespace devBanner.Controllers
             try
             {
                 banner = await Banner.GenerateAsync(userProfile, string.IsNullOrEmpty(subtext) ? userProfile.About : subtext);
+            }
+            catch (AvatarNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {

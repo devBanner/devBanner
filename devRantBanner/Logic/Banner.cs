@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using devBanner.Exceptions;
 using devRant.NET;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
@@ -46,7 +47,7 @@ namespace devBanner.Logic
             {
                 if (response.StatusCode == HttpStatusCode.NotFound)
                 {
-                    throw new Exception("Avatar not found!");
+                    throw new AvatarNotFoundException(profile.Username);
                 }
 
                 response.EnsureSuccessStatusCode();
