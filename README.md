@@ -19,6 +19,9 @@ https://devbanner.center/generate/banner?username=yourusernamehere&subtext=Your%
 - 3 : Add parameter (resolution), bug squash , word wrap
 - 4 : Wallpaper support
 
+## Official Docs (to be added later)
+https://cozyplanes.gitbooks.io/devbanner/
+
 ## Contact
 <cozyplanes@tuta.io>
 
