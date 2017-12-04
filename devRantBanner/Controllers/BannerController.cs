@@ -38,7 +38,13 @@ namespace devBanner.Controllers
                 return BadRequest("User does not exist!");
             }
 
-            if (subtext.Length > 56)
+            // Use the userID to retrive the meta information about the avatar
+            var user = await client.GetUser(userId.UserId);
+            var userProfile = user.Profile;
+
+            var text = string.IsNullOrEmpty(subtext) ? userProfile.About : subtext;
+
+            if (text.Length > 56)
             {
                 _logger.LogDebug("Subtext is too long");
                 _logger.LogDebug(subtext);
@@ -46,16 +52,11 @@ namespace devBanner.Controllers
                 return BadRequest("Subtext too long");
             }
 
-            // Use the userID to retrive the meta information about the avatar
-            var user = await client.GetUser(userId.UserId);
-
-            var userProfile = user.Profile;
-
             string banner;
 
             try
             {
-                banner = await Banner.GenerateAsync(userProfile, string.IsNullOrEmpty(subtext) ? userProfile.About : subtext);
+                banner = await Banner.GenerateAsync(userProfile, text);
             }
             catch (AvatarNotFoundException ex)
             {
