@@ -40,7 +40,7 @@ namespace devBanner.Controllers
             }
             catch (ArgumentException)
             {
-                return "Subtext exceeds max subtext lenght (56 chars)";
+                return "Subtext exceeds max subtext length (56 chars)";
             }
             catch
             {
