@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using devBanner.Exceptions;
+using devBanner.Options;
 using devRant.NET;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
@@ -21,7 +22,7 @@ namespace devBanner.Logic
     {
         private const string DevrantAvatarBaseURL = "https://avatars.devrant.com";
 
-        public static async Task<string> GenerateAsync(Profile profile, string subtext)
+        public static async Task<string> GenerateAsync(BannerOptions options, Profile profile, string subtext)
         {
             if (profile == null)
             {
@@ -49,7 +50,7 @@ namespace devBanner.Logic
 
             byte[] data;
 
-            if (File.Exists(avatarFile))
+            if (options.CacheAvatars && File.Exists(avatarFile))
             {
                 data = await File.ReadAllBytesAsync(avatarFile);
             }
@@ -69,7 +70,10 @@ namespace devBanner.Logic
 
                     data = await response.Content.ReadAsByteArrayAsync();
 
-                    await File.WriteAllBytesAsync(avatarFile, data);
+                    if (options.CacheAvatars)
+                    {
+                        await File.WriteAllBytesAsync(avatarFile, data);
+                    }
                 }
             }
 
