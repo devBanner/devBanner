@@ -6,12 +6,20 @@ using devBanner.Logic;
 using devRant.NET;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
+using Microsoft.Extensions.Logging;
 
 namespace devBanner.Controllers
 {
     [Route("generate/[controller]")]
     public class BannerController : Controller
     {
+        private readonly ILogger _logger;
+
+        public BannerController(ILogger<BannerController> logger)
+        {
+            _logger = logger;
+        }
+
         // GET/POST banner/get
         [HttpGet]
         [HttpPost]
@@ -24,14 +32,19 @@ namespace devBanner.Controllers
 
             if (!userId.Success)
             {
+                _logger.LogDebug($"User {username} does not exist.");
+
                 return BadRequest("User does not exist!");
             }
-            
+
             if (subtext.Length > 56)
             {
+                _logger.LogDebug("Subtext is too long");
+                _logger.LogDebug(subtext);
+
                 return BadRequest("Subtext too long");
             }
-            
+
             // Use the userID to retrive the meta information about the avatar
             var user = await client.GetUser(userId.UserId);
 
@@ -45,8 +58,12 @@ namespace devBanner.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error");
+
                 return StatusCode(500, ex.Message);
             }
+
+            _logger.LogDebug($"Successfully generated banner for {username}");
 
             return PhysicalFile(banner, "image/png");
         }
