@@ -17,21 +17,35 @@ namespace devBanner.Controllers
         // GET banner/get
         [HttpGet()]
         [HttpPost()]
-        public FileResult Get(string username, string subtext)
+        public object Get(string username, string subtext)
         {
-            // Convert username to userID
-            var client = DevRantClient.Create(new HttpClient());
-            var userId = client.GetUserID(username).Result.UserId;
+            try
+            {
+                if (subtext.Length > 56)
+                    throw new ArgumentException("Subtext too long");
 
-            // Use the userID to retrive the meta information about the avatar
-            var userProfile = client.GetUser(userId).Result.Profile;
-            var avatar = userProfile.Avatar;
-            // Avatar base url + avatar meta = rendered avatar url
-            var avatarPath = $"{this.DevrantAvatarBaseURL}/{avatar.Image}";
+                // Convert username to userID
+                var client = DevRantClient.Create(new HttpClient());
+                var userId = client.GetUserID(username).Result.UserId;
 
-            var banner = Banner.Generate(avatarPath, userProfile, (String.IsNullOrEmpty(subtext) ? userProfile.About : subtext));
+                // Use the userID to retrive the meta information about the avatar
+                var userProfile = client.GetUser(userId).Result.Profile;
+                var avatar = userProfile.Avatar;
+                // Avatar base url + avatar meta = rendered avatar url
+                var avatarPath = $"{this.DevrantAvatarBaseURL}/{avatar.Image}";
 
-            return base.PhysicalFile(banner, "image/png");
+                var banner = Banner.Generate(avatarPath, userProfile, (String.IsNullOrEmpty(subtext) ? userProfile.About : subtext));
+
+                return base.PhysicalFile(banner, "image/png");
+            }
+            catch (ArgumentException)
+            {
+                return "Subtext exceeds max subtext lenght (56 chars)";
+            }
+            catch
+            {
+                return "Couldn't create banner. (Wrong username?)";
+            }
         }
     }
 }
