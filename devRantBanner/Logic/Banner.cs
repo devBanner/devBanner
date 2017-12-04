@@ -113,7 +113,7 @@ namespace devBanner.Logic
                 }
             }
 
-            return outputPath;
+            return outputFile;
         }
     }
 }
