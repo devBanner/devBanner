@@ -12,7 +12,7 @@ namespace devBanner.Controllers
     [Route("generate/[controller]")]
     public class BannerController : Controller
     {
-        // GET banner/get
+        // GET/POST banner/get
         [HttpGet]
         [HttpPost]
         public async Task<IActionResult> Get(string username, string subtext)
@@ -26,7 +26,12 @@ namespace devBanner.Controllers
             {
                 return BadRequest("User does not exist!");
             }
-
+            
+            if (subtext.Length > 56)
+            {
+                return BadRequest("Subtext too long");
+            }
+            
             // Use the userID to retrive the meta information about the avatar
             var user = await client.GetUser(userId.UserId);
 
