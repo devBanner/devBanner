@@ -42,7 +42,7 @@ namespace devBanner.Controllers
             var user = await client.GetUser(userId.UserId);
             var userProfile = user.Profile;
 
-            string text = string.IsNullOrEmpty(subtext) ? userProfile.About : subtext;
+            var text = string.IsNullOrEmpty(subtext) ? userProfile.About : subtext;
 
             if (text.Length > 56)
             {
