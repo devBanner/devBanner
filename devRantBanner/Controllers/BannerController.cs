@@ -32,7 +32,16 @@ namespace devBanner.Controllers
 
             var userProfile = user.Profile;
 
-            var banner = await Banner.GenerateAsync(userProfile, string.IsNullOrEmpty(subtext) ? userProfile.About : subtext);
+            string banner;
+
+            try
+            {
+                banner = await Banner.GenerateAsync(userProfile, string.IsNullOrEmpty(subtext) ? userProfile.About : subtext);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             return PhysicalFile(banner, "image/png");
         }
