@@ -7,7 +7,9 @@ using devRant.NET;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using devBanner.Exceptions;
+using devBanner.Options;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace devBanner.Controllers
 {
@@ -15,10 +17,13 @@ namespace devBanner.Controllers
     public class BannerController : Controller
     {
         private readonly ILogger _logger;
+        private readonly BannerOptions _bannerOptions;
 
-        public BannerController(ILogger<BannerController> logger)
+        public BannerController(ILogger<BannerController> logger,
+            IOptionsSnapshot<BannerOptions> bannerOptions)
         {
             _logger = logger;
+            _bannerOptions = bannerOptions.Value;
         }
 
         // GET/POST banner/get
@@ -44,7 +49,7 @@ namespace devBanner.Controllers
 
             var text = string.IsNullOrEmpty(subtext) ? userProfile.About : subtext;
 
-            if (text.Length > 56)
+            if (text.Length > _bannerOptions.MaxSubtextLength)
             {
                 _logger.LogDebug("Subtext is too long");
                 _logger.LogDebug(subtext);
@@ -56,7 +61,7 @@ namespace devBanner.Controllers
 
             try
             {
-                banner = await Banner.GenerateAsync(userProfile, text);
+                banner = await Banner.GenerateAsync(_bannerOptions, userProfile, text);
             }
             catch (AvatarNotFoundException ex)
             {
