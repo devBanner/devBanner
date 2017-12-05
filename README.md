@@ -5,19 +5,7 @@ Banner creation with devRant avatar and username
 https://devBanner.github.io/devBanner_Frontend
 
 ### Front-end development repo (for devs)
-https://github.com/cozyplanes/devBanner_Frontend
-
-## Manual process
-Click the link below, and edit the params
-Add `%20` for space if necessary, `%0A` for newline (word wrap coming soon!)
-https://devbanner.center/generate/banner?username=yourusernamehere&subtext=Your%20subtext%20here%0Anewline
-
-## Phases
-
-- 1 : Initial code base, bug fix - **current**
-- 2 : Finish Front-End alpha, bug fix **december 15-20**
-- 3 : Add parameter (resolution), bug squash , word wrap
-- 4 : Wallpaper support
+https://github.com/devBanner/devBanner_Frontend
 
 ## Official Docs (to be added later)
 https://cozyplanes.gitbooks.io/devbanner/
