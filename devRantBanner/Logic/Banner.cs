@@ -102,12 +102,13 @@ namespace devBanner.Logic
                 var usernameTargetX = banner.Width / 3;
                 var usernameTartgetY = banner.Height / 4;
                 var usernameTarget = new Point(usernameTargetX, usernameTartgetY);
+                var usernameSize = TextMeasurer.Measure(profile.Username, new RendererOptions(fontUsername));
 
                 var subtextTargetX = usernameTarget.X;
-                var subtextTartgetY = usernameTarget.Y + fontSizeUsername;
-                var subtextTarget = new Point(subtextTargetX, subtextTartgetY);
+                var subtextTartgetY = usernameTarget.Y + usernameSize.Height + 10;
+                var subtextTarget = new PointF(subtextTargetX, subtextTartgetY);
                 var subTextWidth = banner.Width - subtextTargetX - 15;
-                var subTextHeight = fontSizeSubtext;
+                var subTextHeight = banner.Height - subtextTartgetY - 15;
 
                 var devrantTargetX = banner.Width - 108;
                 var devrantTargetY = banner.Height - 4 - fontSizeDevrant;
@@ -124,7 +125,8 @@ namespace devBanner.Logic
 
                 // Scale font size to subtext
                 fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight), options.MaxSubtextWidth);
-
+                
+                // Add subtext word wrapping
                 subtext = subtext.AddWrap(fontSubtext, options.MaxSubtextWidth, options.MaxSubtextWraps);
 
                 // Draw subtext

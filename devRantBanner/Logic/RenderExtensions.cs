@@ -17,7 +17,7 @@ namespace devBanner.Logic
             string text,
             Font font,
             Rgba32 color,
-            Point target,
+            PointF target,
             HorizontalAlignment horizontalAlignment = HorizontalAlignment.Left,
             VerticalAlignment verticalAlignment = VerticalAlignment.Center)
         {
