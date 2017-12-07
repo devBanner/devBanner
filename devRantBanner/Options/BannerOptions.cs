@@ -9,6 +9,10 @@ namespace devBanner.Options
     {
         public int MaxSubtextLength { get; set; }
 
+        public float MaxSubtextWidth { get; set; }
+
+        public int MaxSubtextWraps { get; set; }
+
         public bool CacheAvatars { get; set; }
     }
 }
