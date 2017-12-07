@@ -108,7 +108,7 @@ namespace devBanner.Logic
                 var subtextTargetY = usernameTarget.Y + usernameSize.Height + 10;
                 var subtextTarget = new PointF(subtextTargetX, subtextTargetY);
                 var subTextWidth = banner.Width - subtextTargetX - 15;
-                var subTextHeight = banner.Height - subtextTargetY - 15;
+                var subTextHeight = fontSizeSubtext;
 
                 var devrantTargetX = banner.Width - 108;
                 var devrantTargetY = banner.Height - 4 - fontSizeDevrant;
