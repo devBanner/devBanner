@@ -123,7 +123,9 @@ namespace devBanner.Logic
                 banner.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget);
 
                 // Scale font size to subtext
-                fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight));
+                fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight), options.MaxSubtextWidth);
+
+                subtext = subtext.AddWrap(fontSubtext, options.MaxSubtextWidth, options.MaxSubtextWraps);
 
                 // Draw subtext
                 banner.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget);
