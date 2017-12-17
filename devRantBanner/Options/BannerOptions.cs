@@ -9,5 +9,8 @@
         public int MaxSubtextWraps { get; set; }
 
         public bool CacheAvatars { get; set; }
+
+        // In minutes
+        public int MaxCacheAvatarAge { get; set; }
     }
 }

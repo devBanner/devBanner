@@ -45,7 +45,7 @@ namespace devBanner.Logic
 
             byte[] data;
 
-            if (options.CacheAvatars && File.Exists(avatarFile))
+            if (options.CacheAvatars && File.Exists(avatarFile) && File.GetCreationTime(avatarFile) > DateTime.Now.AddMinutes(-options.MaxCacheAvatarAge))
             {
                 data = await File.ReadAllBytesAsync(avatarFile);
             }
