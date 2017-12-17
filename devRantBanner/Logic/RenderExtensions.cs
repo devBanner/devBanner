@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing;
@@ -44,7 +41,7 @@ namespace devBanner.Logic
 
         public static Font ScaleToText(this Font font, string text, SizeF desiredSize, float maxWidth)
         {
-            SizeF size = TextMeasurer.Measure(text, new RendererOptions(font) { WrappingWidth = maxWidth });
+            var size = TextMeasurer.Measure(text, new RendererOptions(font) { WrappingWidth = maxWidth });
 
             // Modified version of https://github.com/SixLabors/Samples/blob/master/ImageSharp/DrawWaterMarkOnImage/Program.cs#L92
             float targetHeight = desiredSize.Height;
