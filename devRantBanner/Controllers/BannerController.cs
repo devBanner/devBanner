@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace devBanner.Controllers
 {
-    [Route("generate/[controller]")]
+    [Route("[controller]")]
     public class BannerController : Controller
     {
         private readonly ILogger _logger;
