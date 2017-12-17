@@ -95,13 +95,12 @@ namespace devBanner.Logic
                 var avatarTarget = new Point(avatarTargetX, avatarTargetY);
 
                 var usernameTargetX = banner.Width / 3;
-                var usernameTargetY = banner.Height / 4;
-                var usernameTarget = new Point(usernameTargetX, usernameTargetY);
-                var usernameSize = TextMeasurer.Measure(profile.Username, new RendererOptions(fontUsername));
+                var usernameTargetY = (banner.Height / 4f) - (fontSizeUsername / 2f);
+                var usernameTarget = new PointF(usernameTargetX, usernameTargetY);
 
                 var subtextTargetX = usernameTarget.X;
-                var subtextTargetY = usernameTarget.Y + usernameSize.Height + 10;
-                var subtextTarget = new PointF(subtextTargetX, subtextTargetY);
+                var subtextTargetY = usernameTarget.Y + fontSizeUsername;
+                var subtextTarget = new PointF(subtextTargetX, subtextTargetY + (fontSizeSubtext / 2f));
                 var subTextWidth = banner.Width - subtextTargetX - 15;
                 var subTextHeight = fontSizeSubtext;
 
@@ -116,7 +115,7 @@ namespace devBanner.Logic
                 banner.DrawImage(avatarImage, avatarSize, avatarTarget);
 
                 // Draw username
-                banner.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget);
+                banner.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget, verticalAlignment: VerticalAlignment.Top);
 
                 // Scale font size to subtext
                 fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight), options.MaxSubtextWidth);
@@ -125,7 +124,7 @@ namespace devBanner.Logic
                 subtext = subtext.AddWrap(fontSubtext, options.MaxSubtextWidth, options.MaxSubtextWraps);
 
                 // Draw subtext
-                banner.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget);
+                banner.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget, verticalAlignment: VerticalAlignment.Top);
 
                 // Draw devrant text
                 banner.DrawText("devrant.com", fontDevrant, Rgba32.White, devrantTarget, HorizontalAlignment.Left, VerticalAlignment.Top);
