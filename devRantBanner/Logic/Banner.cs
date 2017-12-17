@@ -1,21 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using devBanner.Exceptions;
 using devBanner.Options;
 using devRant.NET;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.Primitives;
 
 namespace devBanner.Logic
 {
     public class Banner
     {
-        private const string DevrantAvatarBaseUrl = "https://avatars.devrant.com";
+        private const string DevrantAvatarBaseURL = "https://avatars.devrant.com";
 
         public static async Task<string> GenerateAsync(BannerOptions options, Profile profile, string subtext)
         {
@@ -25,7 +30,7 @@ namespace devBanner.Logic
             }
 
             // Avatar base url + avatar meta = rendered avatar url
-            var avatarUrl = $"{DevrantAvatarBaseUrl}/{profile.Avatar.Image}";
+            var avatarURL = $"{DevrantAvatarBaseURL}/{profile.Avatar.Image}";
 
             const string outputDir = "generated";
             const string avatarsDir = "avatars";
@@ -54,7 +59,7 @@ namespace devBanner.Logic
                 // Download rendered avatar
                 var httpClient = new HttpClient();
 
-                using (var response = await httpClient.GetAsync(avatarUrl))
+                using (var response = await httpClient.GetAsync(avatarURL))
                 {
                     if (response.StatusCode == HttpStatusCode.NotFound)
                     {

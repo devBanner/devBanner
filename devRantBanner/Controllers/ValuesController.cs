@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace devBanner.Controllers
+namespace devRantBanner.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
@@ -10,7 +13,7 @@ namespace devBanner.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new[] { "value1", "value2" };
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
