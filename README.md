@@ -2,14 +2,15 @@
 Banner creation with devRant avatar and username
 
 ## Current Front-end
-https://devBanner.github.io/devBanner_Frontend
+https://devBanner.center
 
 ### Front-end development repo (for devs)
 https://github.com/devBanner/devBanner_Frontend
 
+<!--
 ## Official Docs (to be added later)
 https://cozyplanes.gitbooks.io/devbanner/
-
+-->
 ## Contact
 <cozyplanes@tuta.io>
 
