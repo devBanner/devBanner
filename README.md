@@ -61,7 +61,6 @@ https://github.com/devBanner/devBanner - Back-end development repository
 [<img src="https://img.shields.io/badge/contributor-cozyplanes-blue.svg?style=for-the-badge">](https://github.com/cozyplanes) 
 [<img src="https://img.shields.io/badge/contributor-Mitch528-yellow.svg?style=for-the-badge">](https://github.com/Mitch528) 
 [<img src="https://img.shields.io/badge/contributor-JakubSteplowski-orange.svg?style=for-the-badge">](https://github.com/JakubSteplowski) 
-[<img src="https://img.shields.io/badge/contributor-LoganS1-red.svg?style=for-the-badge">](https://github.com/LoganS1)
 
 - devRant API
 
