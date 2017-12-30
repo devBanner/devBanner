@@ -2,10 +2,11 @@
 
 ![logo](https://i.imgur.com/fHiT4OO.png "logo")
 
-# **devBanner**
+
 Create your own devRant Banner now!      
 https://devbanner.center
 <p align="center">
+
   <img src="https://img.shields.io/github/issues/devBanner/devBanner.svg?style=for-the-badge">
   <img src="https://img.shields.io/github/issues-pr/devBanner/devBanner.svg?style=for-the-badge">
   <img src="https://img.shields.io/gitter/room/devBanner/devBanner.svg?style=for-the-badge">
