@@ -15,7 +15,7 @@ https://devbanner.center
 ----
 
 ## About
-**devBanner** is a collaboration project first started in devRant. It aimed at creating personalized banners for everyone without using photo manipulation software. It currently creates personalized banners including your own subtext for devRant members using the devRant API.
+**devBanner** is a collaboration project first started in devRant. It's aimed at creating personalized banners for everyone without using photo manipulation software. It currently creates personalized banners including your own subtext for devRant members using the devRant API.
 
 ## Current Features
 - Your own subtext. You can write some lengthy subtext as well!
@@ -43,7 +43,7 @@ Well, it is easier than you think.
 (*Based on the frontend in Dec 27*)
 
 ## (Non-paid) Hire
-We are looking for a front-end developer who can improve the overall designs and responsibility of our current frontend. Please contact via email or join the Gitter Chat by clicking the Join button above.
+We are looking for a front-end developer who can improve the overall designs and responsibility of our current frontend. Please contact via email or join the Gitter Chat by clicking the Chat on Gitter button above.
 
 ## Useful Links
 https://devbanner.center - Create your own devRant banner here    
