@@ -1,10 +1,10 @@
 
+<p align="center"><img src="https://i.imgur.com/fHiT4OO.png"/></p> 
 
-![logo](https://i.imgur.com/fHiT4OO.png "logo")
+<h2 align="center"><b>devBanner</b></h2>
+<h4 align="center">Create your own devRant Banner now!</h4>
+<h4 align="center">https://devbanner.center</h4>
 
-
-Create your own devRant Banner now!      
-https://devbanner.center
 <p align="center">
 
   <img src="https://img.shields.io/github/issues/devBanner/devBanner.svg?style=for-the-badge">
