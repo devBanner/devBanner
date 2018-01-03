@@ -93,5 +93,5 @@ https://github.com/devBanner/devBanner - Back-end development repository
 ```
 
 
-### Other implementations by devRant users
+### Different implementations by other people
 https://gist.github.com/alberto98fx/f90d29cfaf8013aa0de44e7dbe6e6fef - JS with Canvas
