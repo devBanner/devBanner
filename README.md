@@ -1,10 +1,10 @@
 
+<p align="center"><img src="https://i.imgur.com/fHiT4OO.png"/></p> 
 
-![logo](https://i.imgur.com/fHiT4OO.png "logo")
+<h2 align="center"><b>devBanner</b></h2>
+<h4 align="center">Create your own devRant Banner now!</h4>
+<h4 align="center">https://devbanner.center</h4>
 
-
-Create your own devRant Banner now!      
-https://devbanner.center
 <p align="center">
 
   <img src="https://img.shields.io/github/issues/devBanner/devBanner.svg?style=for-the-badge">
@@ -93,5 +93,5 @@ https://github.com/devBanner/devBanner - Back-end development repository
 ```
 
 
-### Other implementations by devRant users
+### Different implementations by other people
 https://gist.github.com/alberto98fx/f90d29cfaf8013aa0de44e7dbe6e6fef - JS with Canvas
