@@ -33,18 +33,18 @@ Looks like you are interested in creating your own banner, aren't you?
 
 Well, it is easier than you think.
 
-1. Open up your FAVORITE browser. We support way down until Netscape Navigator 7.20 ! (We have tried hard to achieve this.)
-2. Head up to https://devbanner.center
-3. You will be greeted by the beautiful, colorful frontend.
+1. Open up your FAVORITE browser.
+2. Head up to https://devbanner.center .
+3. You will be greeted by the new beautiful, colorful frontend by Skayo.
 4. Fill in the form. You just have to type your devRant username and your own subtext. You can even write some nerd-y subtexts. (But we don't support xalgo..... Sorry)
-5. After a few seconds, the generated banner will appear below. (In older browsers, it may open in another tab)
-6. Right-click the image > Save As....
+5. After a few seconds, the generated banner will appear below. (In older browsers, it may open in another tab. To save, right-click and click Save As... button)
+6. Press the download button.
 7. Use it everywhere!
 
-(*Based on the frontend in Dec 27*)
+(*Based on the frontend in 10th Jan 2018*)
 
 ## (Non-paid) Hire
-We are looking for a front-end developer who can improve the overall designs and responsibility of our current frontend. Please contact via email or join the Gitter Chat by clicking the Chat on Gitter button above.
+We are looking for a front-end developer who can improve the overall designs and responsibility of our current frontend. Please join the Gitter Chat by clicking the Chat on Gitter button above.
 
 ## Useful Links
 https://devbanner.center - Create your own devRant banner here    
