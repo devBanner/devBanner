@@ -1,15 +1,17 @@
 
 <p align="center"><img src="https://i.imgur.com/fHiT4OO.png"/></p> 
 
-<h2 align="center"><b>devBanner</b></h2>
+<!--<h2 align="center"><b>devBanner</b></h2>
 <h4 align="center">Create your own devRant Banner now!</h4>
-<h4 align="center">https://devbanner.center</h4>
+<h4 align="center">https://devbanner.center</h4>-->
+
+#### Create your own banner now! https://devbanner.center
 
 <p align="center">
 
-  <img src="https://img.shields.io/github/issues/devBanner/devBanner.svg?style=for-the-badge">
-  <img src="https://img.shields.io/github/issues-pr/devBanner/devBanner.svg?style=for-the-badge">
-  <img src="https://img.shields.io/gitter/room/devBanner/devBanner.svg?style=for-the-badge">
+  [<img src="https://img.shields.io/github/issues/devBanner/devBanner.svg?style=for-the-badge">](https://github.com/devBanner/devBanner/issues)
+  [<img src="https://img.shields.io/github/issues-pr/devBanner/devBanner.svg?style=for-the-badge">](https://github.com/devBanner/devBanner/pulls)
+  [<img src="https://img.shields.io/gitter/room/devBanner/devBanner.svg?style=for-the-badge">](https://gitter.im/devbanner/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
   
 </p>
 
@@ -20,12 +22,11 @@
 
 ## Current Features
 - Your own subtext. You can write some lengthy subtext as well!
-- Copyright-free. You don't need to worry about all the copyright problems. The backend itself is licensed GPL, frontend is Unlicense, and the banner itself should probably be WTFPL (😂).
-- Lightweight. Most banners are under 500KB, so no problem downloading and using anywhere!
+- Lightweight. Almost all banners are under 500KB, so no problem downloading and using anywhere!
 
 ## Upcoming Features
 - Improved banner designs
-- Banner Size selection
+- Banner size selection
 - Wallpaper support
 
 ## I want one!
@@ -37,9 +38,8 @@ Well, it is easier than you think.
 2. Head up to https://devbanner.center .
 3. You will be greeted by the new beautiful, colorful frontend by Skayo.
 4. Fill in the form. You just have to type your devRant username and your own subtext. You can even write some nerd-y subtexts. (But we don't support xalgo..... Sorry)
-5. After a few seconds, the generated banner will appear below. (In older browsers, it may open in another tab. To save, right-click and click Save As... button)
-6. Press the download button.
-7. Use it everywhere!
+5. After a few seconds, the generated banner will appear below. Press the download button. (In older browsers, it may open in another tab. To save, right-click and click Save As... button)
+6. Use it everywhere!
 
 (*Based on the frontend in 10th Jan 2018*)
 
@@ -49,7 +49,8 @@ We are looking for a front-end developer who can improve the overall designs and
 ## Useful Links
 https://devbanner.center - Create your own devRant banner here    
 https://github.com/devBanner/devBanner_Frontend - Front-end development repository      
-https://github.com/devBanner/devBanner - Back-end development repository     
+https://github.com/devBanner/devBanner - Back-end development repository    
+https://gitter.im/devbanner/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link - Gitter chat    
 <cozyplanes@tuta.io> - Contact me directly
 
 
