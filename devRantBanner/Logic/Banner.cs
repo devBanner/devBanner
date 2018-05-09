@@ -134,5 +134,27 @@ namespace devBanner.Logic
 
             return outputFile;
         }
+
+        //Based on https://stackoverflow.com/questions/1855884/determine-font-color-based-on-background-color. Which itself is based on http://juicystudio.com/article/luminositycontrastratioalgorithm.php
+        /// <summary>
+        /// Returns a foreground color based on a background color. 
+        /// </summary>
+        /// <param name="backgroundColor"></param>
+        /// <returns></returns>
+        private static Rgba32 GetForegroundColor(Rgba32 backgroundColor)
+        {
+            // Calculating the perceptive luminance - human eye favors green color... 
+            double perceptiveLuminance = (0.299 * backgroundColor.R + 0.587 * backgroundColor.G + 0.114 * backgroundColor.B) / 255;
+
+            if (perceptiveLuminance > 0.65) //May need to be adjusted. A lower value will trigger black font faster.
+            {
+                return Rgba32.Black; // bright colors - black font
+            }
+            else
+            {
+                return Rgba32.White; // dark colors - white font
+            }
+
+        }
     }
 }
