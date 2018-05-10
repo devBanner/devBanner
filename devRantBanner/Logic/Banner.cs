@@ -107,15 +107,16 @@ namespace devBanner.Logic
                 var devrantTargetX = banner.Width - 108;
                 var devrantTargetY = banner.Height - 4 - fontSizeDevrant;
                 var devrantTarget = new Point(devrantTargetX, devrantTargetY);
-
+                
+                var backgroundColor = Rgba32.FromHex(profile.Avatar.Background);
                 // Draw background
-                banner.SetBGColor(Rgba32.FromHex(profile.Avatar.Background));
+                banner.SetBGColor(backgroundColor);
 
                 // Draw avatar
                 banner.DrawImage(avatarImage, avatarSize, avatarTarget);
 
                 // Draw username
-                banner.DrawText(profile.Username, fontUsername, Rgba32.White, usernameTarget, verticalAlignment: VerticalAlignment.Top);
+                banner.DrawText(profile.Username, fontUsername, GetForegroundColor(backgroundColor), usernameTarget, verticalAlignment: VerticalAlignment.Top);
 
                 // Scale font size to subtext
                 fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight), options.MaxSubtextWidth);
@@ -124,10 +125,10 @@ namespace devBanner.Logic
                 subtext = subtext.AddWrap(fontSubtext, options.MaxSubtextWidth, options.MaxSubtextWraps);
 
                 // Draw subtext
-                banner.DrawText(subtext, fontSubtext, Rgba32.White, subtextTarget, verticalAlignment: VerticalAlignment.Top);
+                banner.DrawText(subtext, fontSubtext, GetForegroundColor(backgroundColor), subtextTarget, verticalAlignment: VerticalAlignment.Top);
 
                 // Draw devrant text
-                banner.DrawText("devrant.com", fontDevrant, Rgba32.White, devrantTarget, HorizontalAlignment.Left, VerticalAlignment.Top);
+                banner.DrawText("devrant.com", fontDevrant, GetForegroundColor(backgroundColor), devrantTarget, HorizontalAlignment.Left, VerticalAlignment.Top);
 
                 banner.Save(outputFile, new PngEncoder());
             }
@@ -135,18 +136,16 @@ namespace devBanner.Logic
             return outputFile;
         }
 
-        //Based on https://stackoverflow.com/questions/1855884/determine-font-color-based-on-background-color. Which itself is based on http://juicystudio.com/article/luminositycontrastratioalgorithm.php
         /// <summary>
-        /// Returns a foreground color based on a background color. 
+        /// Returns a foreground color based on the luminance of the background color. 
         /// </summary>
-        /// <param name="backgroundColor"></param>
-        /// <returns></returns>
+        /// <returns>Black color if the background is bright, white if the background is dark</returns>
         private static Rgba32 GetForegroundColor(Rgba32 backgroundColor)
         {
-            // Calculating the perceptive luminance - human eye favors green color... 
+            // Calculating the perceptive luminance - human eye favors green color... Based on http://juicystudio.com/article/luminositycontrastratioalgorithm.php
             double perceptiveLuminance = (0.299 * backgroundColor.R + 0.587 * backgroundColor.G + 0.114 * backgroundColor.B) / 255;
 
-            if (perceptiveLuminance > 0.65) //May need to be adjusted. A lower value will trigger black font faster.
+            if (perceptiveLuminance > 0.70) //May need to be adjusted. A lower value will trigger black font faster.
             {
                 return Rgba32.Black; // bright colors - black font
             }
