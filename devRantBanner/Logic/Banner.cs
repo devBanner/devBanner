@@ -109,6 +109,8 @@ namespace devBanner.Logic
                 var devrantTarget = new Point(devrantTargetX, devrantTargetY);
                 
                 var backgroundColor = Rgba32.FromHex(profile.Avatar.Background);
+                var foregroundColor = GetForegroundColor(backgroundColor);
+                
                 // Draw background
                 banner.SetBGColor(backgroundColor);
 
@@ -116,7 +118,7 @@ namespace devBanner.Logic
                 banner.DrawImage(avatarImage, avatarSize, avatarTarget);
 
                 // Draw username
-                banner.DrawText(profile.Username, fontUsername, GetForegroundColor(backgroundColor), usernameTarget, verticalAlignment: VerticalAlignment.Top);
+                banner.DrawText(profile.Username, fontUsername, foregroundColor, usernameTarget, verticalAlignment: VerticalAlignment.Top);
 
                 // Scale font size to subtext
                 fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight), options.MaxSubtextWidth);
@@ -125,10 +127,10 @@ namespace devBanner.Logic
                 subtext = subtext.AddWrap(fontSubtext, options.MaxSubtextWidth, options.MaxSubtextWraps);
 
                 // Draw subtext
-                banner.DrawText(subtext, fontSubtext, GetForegroundColor(backgroundColor), subtextTarget, verticalAlignment: VerticalAlignment.Top);
+                banner.DrawText(subtext, fontSubtext, foregroundColor, subtextTarget, verticalAlignment: VerticalAlignment.Top);
 
                 // Draw devrant text
-                banner.DrawText("devrant.com", fontDevrant, GetForegroundColor(backgroundColor), devrantTarget, HorizontalAlignment.Left, VerticalAlignment.Top);
+                banner.DrawText("devrant.com", fontDevrant, foregroundColor, devrantTarget, HorizontalAlignment.Left, VerticalAlignment.Top);
 
                 banner.Save(outputFile, new PngEncoder());
             }
