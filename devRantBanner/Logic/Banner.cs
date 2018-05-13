@@ -147,13 +147,13 @@ namespace devBanner.Logic
             // Calculating the perceptive luminance - human eye favors green color... Based on http://juicystudio.com/article/luminositycontrastratioalgorithm.php
             double perceptiveLuminance = (0.299 * backgroundColor.R + 0.587 * backgroundColor.G + 0.114 * backgroundColor.B) / 255;
 
-            if (perceptiveLuminance > 0.7) //May need to be adjusted. A lower value will trigger black font faster.
+            if (perceptiveLuminance > 0.7) // A lower value will trigger black font faster. (0.65 will trigger black font in light blue bg as well)
             {
-                return Rgba32.Black; // bright colors - black font
+                return Rgba32.Black; // bright colors --> black font
             }
             else
             {
-                return Rgba32.White; // dark colors - white font
+                return Rgba32.White; // dark colors --> white font
             }
 
         }
