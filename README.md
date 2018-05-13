@@ -62,6 +62,7 @@ https://gitter.im/devbanner/Lobby?utm_source=share-link&utm_medium=link&utm_camp
 [<img src="https://img.shields.io/badge/contributor-cozyplanes-blue.svg?style=for-the-badge">](https://github.com/cozyplanes) 
 [<img src="https://img.shields.io/badge/contributor-Mitch528-yellow.svg?style=for-the-badge">](https://github.com/Mitch528) 
 [<img src="https://img.shields.io/badge/contributor-JakubSteplowski-orange.svg?style=for-the-badge">](https://github.com/JakubSteplowski) 
+[<img src="https://img.shields.io/badge/contributor-Etnath-red.svg?style=for-the-badge">](https://github.com/Etnath)
 
 - devRant API
 
