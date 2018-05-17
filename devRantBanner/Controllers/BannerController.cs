@@ -27,7 +27,7 @@ namespace devBanner.Controllers
         // GET/POST banner/get
         [HttpGet]
         [HttpPost]
-        public async Task<IActionResult> Get(string username, string subtext)
+        public async Task<IActionResult> Get(string username, string subtext, int width)
         {
             var client = DevRantClient.Create(new HttpClient());
 
@@ -59,7 +59,14 @@ namespace devBanner.Controllers
 
             try
             {
-                banner = await Banner.GenerateAsync(_bannerOptions, userProfile, text);
+                if (width < 16)
+                {
+                    banner = await Banner.GenerateAsync(_bannerOptions, userProfile, text);
+                }
+                else
+                {
+                    banner = await Banner.GenerateAsync(_bannerOptions, userProfile, text, width,  (int)(width / _bannerOptions.WidthToHeightRatio));
+                }
             }
             catch (AvatarNotFoundException ex)
             {

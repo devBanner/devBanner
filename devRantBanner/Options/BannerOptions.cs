@@ -12,5 +12,7 @@
 
         // In minutes
         public int MaxCacheAvatarAge { get; set; }
+
+        public float WidthToHeightRatio { get; set; }
     }
 }

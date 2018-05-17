@@ -17,7 +17,7 @@ namespace devBanner.Logic
     {
         private const string DevrantAvatarBaseURL = "https://avatars.devrant.com";
 
-        public static async Task<string> GenerateAsync(BannerOptions options, Profile profile, string subtext)
+        public static async Task<string> GenerateAsync(BannerOptions options, Profile profile, string subtext, int width = 800, int height = 192)
         {
             if (profile == null)
             {
@@ -73,7 +73,7 @@ namespace devBanner.Logic
             }
 
             using (var avatarImage = Image.Load(data))
-            using (var banner = new Image<Rgba32>(800, 192))
+            using (var banner = new Image<Rgba32>(width, height))
             {
                 var fontCollection = new FontCollection();
                 fontCollection.Install("fonts/Comfortaa-Regular.ttf");
