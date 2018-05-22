@@ -59,14 +59,7 @@ namespace devBanner.Controllers
 
             try
             {
-                if (width < 16)
-                {
-                    banner = await Banner.GenerateAsync(_bannerOptions, userProfile, text);
-                }
-                else
-                {
-                    banner = await Banner.GenerateAsync(_bannerOptions, userProfile, text, width,  (int)(width / _bannerOptions.WidthToHeightRatio));
-                }
+                banner = await Banner.GenerateAsync(_bannerOptions, userProfile, text, width, (int)(width / _bannerOptions.WidthToHeightRatio));
             }
             catch (AvatarNotFoundException ex)
             {

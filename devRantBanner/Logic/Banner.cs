@@ -24,6 +24,18 @@ namespace devBanner.Logic
                 throw new ArgumentNullException(nameof(profile));
             }
 
+            if (width < 64)
+            {
+                width = 800;
+                height = 192;
+            }
+
+            if (width > 2048)
+            {
+                width = 2048;
+                height = (int)(width / options.WidthToHeightRatio);
+            }
+
             // Avatar base url + avatar meta = rendered avatar url
             var avatarURL = $"{DevrantAvatarBaseURL}/{profile.Avatar.Image}";
 
@@ -78,9 +90,11 @@ namespace devBanner.Logic
                 var fontCollection = new FontCollection();
                 fontCollection.Install("fonts/Comfortaa-Regular.ttf");
 
-                var fontSizeUsername = 64;
-                var fontSizeSubtext = fontSizeUsername / 2;
-                var fontSizeDevrant = 16;
+                var fontSizeUsername = (int)(width * 0.08);
+                var fontSizeSubtext = (int)(width * 0.04);
+                var fontSizeDevrant = (int)(width * 0.02);
+
+                
 
                 var fontUsername = fontCollection.CreateFont("Comfortaa", fontSizeUsername, FontStyle.Bold);
                 var fontSubtext = fontCollection.CreateFont("Comfortaa", fontSizeSubtext, FontStyle.Regular);
@@ -104,8 +118,8 @@ namespace devBanner.Logic
                 var subTextWidth = banner.Width - subtextTargetX - 15;
                 var subTextHeight = fontSizeSubtext;
 
-                var devrantTargetX = banner.Width - 108;
-                var devrantTargetY = banner.Height - 4 - fontSizeDevrant;
+                var devrantTargetX = banner.Width - (int)(width * 0.130);
+                var devrantTargetY = banner.Height - (int)(width * 0.03);
                 var devrantTarget = new Point(devrantTargetX, devrantTargetY);
                 
                 var backgroundColor = Rgba32.FromHex(profile.Avatar.Background);
@@ -124,7 +138,7 @@ namespace devBanner.Logic
                 fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight), options.MaxSubtextWidth);
 
                 // Add subtext word wrapping
-                subtext = subtext.AddWrap(fontSubtext, options.MaxSubtextWidth, options.MaxSubtextWraps);
+                subtext = subtext.AddWrap(fontSubtext, subTextWidth, options.MaxSubtextWraps);
 
                 // Draw subtext
                 banner.DrawText(subtext, fontSubtext, foregroundColor, subtextTarget, verticalAlignment: VerticalAlignment.Top);
