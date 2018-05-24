@@ -92,9 +92,7 @@ namespace devBanner.Logic
 
                 var fontSizeUsername = (int)(width * 0.08);
                 var fontSizeSubtext = (int)(width * 0.04);
-                var fontSizeDevrant = (int)(width * 0.02);
-
-                
+                var fontSizeDevrant = (int)(width * 0.02);       
 
                 var fontUsername = fontCollection.CreateFont("Comfortaa", fontSizeUsername, FontStyle.Bold);
                 var fontSubtext = fontCollection.CreateFont("Comfortaa", fontSizeSubtext, FontStyle.Regular);
@@ -135,7 +133,7 @@ namespace devBanner.Logic
                 banner.DrawText(profile.Username, fontUsername, foregroundColor, usernameTarget, verticalAlignment: VerticalAlignment.Top);
 
                 // Scale font size to subtext
-                fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight), options.MaxSubtextWidth);
+                fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight), subTextWidth);
 
                 // Add subtext word wrapping
                 subtext = subtext.AddWrap(fontSubtext, subTextWidth, options.MaxSubtextWraps);
