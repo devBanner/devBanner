@@ -24,7 +24,7 @@ namespace devBanner.Logic
                 throw new ArgumentNullException(nameof(profile));
             }
 
-            if (width < 64)
+            if (width < 128)
             {
                 width = 800;
                 height = 192;
@@ -102,7 +102,7 @@ namespace devBanner.Logic
                 var avatarWidth = avatarHeight;
                 var avatarSize = new Size(avatarWidth, avatarHeight);
 
-                var avatarTargetX = 15;
+                var avatarTargetX = (int)(width * 0.01875);
                 var avatarTargetY = 0;
                 var avatarTarget = new Point(avatarTargetX, avatarTargetY);
 
@@ -113,7 +113,7 @@ namespace devBanner.Logic
                 var subtextTargetX = usernameTarget.X;
                 var subtextTargetY = usernameTarget.Y + fontSizeUsername;
                 var subtextTarget = new PointF(subtextTargetX, subtextTargetY + (fontSizeSubtext / 2f));
-                var subTextWidth = banner.Width - subtextTargetX - 15;
+                var subTextWidth = banner.Width - subtextTargetX - (int)(width * 0.01875);
                 var subTextHeight = fontSizeSubtext;
 
                 var devrantTargetX = banner.Width - (int)(width * 0.130);
