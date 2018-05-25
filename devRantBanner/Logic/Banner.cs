@@ -24,17 +24,17 @@ namespace devBanner.Logic
                 throw new ArgumentNullException(nameof(profile));
             }
 
-            if (width < 128)
+            if (width < options.MinWidth)
             {
-                width = 800;
-                height = 192;
+                width = options.DefaultWidth;                
             }
 
-            if (width > 2048)
+            if (width > options.MaxWidth)
             {
-                width = 2048;
-                height = (int)(width / options.WidthToHeightRatio);
+                width = options.MaxWidth;
             }
+
+            height = (int)(width / options.WidthToHeightRatio);
 
             // Avatar base url + avatar meta = rendered avatar url
             var avatarURL = $"{DevrantAvatarBaseURL}/{profile.Avatar.Image}";

@@ -4,8 +4,6 @@
     {
         public int MaxSubtextLength { get; set; }
 
-        public float MaxSubtextWidth { get; set; }
-
         public int MaxSubtextWraps { get; set; }
 
         public bool CacheAvatars { get; set; }
@@ -14,5 +12,11 @@
         public int MaxCacheAvatarAge { get; set; }
 
         public float WidthToHeightRatio { get; set; }
+
+        public int DefaultWidth { get; set; }
+
+        public int MinWidth { get; set; }
+
+        public int MaxWidth { get; set; }
     }
 }
