@@ -24,17 +24,9 @@ namespace devBanner.Logic
                 throw new ArgumentNullException(nameof(profile));
             }
 
-            if (width < options.MinWidth)
-            {
-                width = options.DefaultWidth;                
-            }
+            var checkedWidth = CheckWidth(options, width);
 
-            if (width > options.MaxWidth)
-            {
-                width = options.MaxWidth;
-            }
-
-            height = (int)(width / options.WidthToHeightRatio);
+            height = (int)(checkedWidth / options.WidthToHeightRatio);
 
             // Avatar base url + avatar meta = rendered avatar url
             var avatarURL = $"{DevrantAvatarBaseURL}/{profile.Avatar.Image}";
@@ -85,14 +77,14 @@ namespace devBanner.Logic
             }
 
             using (var avatarImage = Image.Load(data))
-            using (var banner = new Image<Rgba32>(width, height))
+            using (var banner = new Image<Rgba32>(checkedWidth, height))
             {
                 var fontCollection = new FontCollection();
                 fontCollection.Install("fonts/Comfortaa-Regular.ttf");
 
-                var fontSizeUsername = (int)(width * 0.08);
-                var fontSizeSubtext = (int)(width * 0.04);
-                var fontSizeDevrant = (int)(width * 0.02);       
+                var fontSizeUsername = (int)(checkedWidth * 0.08);
+                var fontSizeSubtext = (int)(checkedWidth * 0.04);
+                var fontSizeDevrant = (int)(checkedWidth * 0.02);
 
                 var fontUsername = fontCollection.CreateFont("Comfortaa", fontSizeUsername, FontStyle.Bold);
                 var fontSubtext = fontCollection.CreateFont("Comfortaa", fontSizeSubtext, FontStyle.Regular);
@@ -102,7 +94,7 @@ namespace devBanner.Logic
                 var avatarWidth = avatarHeight;
                 var avatarSize = new Size(avatarWidth, avatarHeight);
 
-                var avatarTargetX = (int)(width * 0.01875);
+                var avatarTargetX = (int)(checkedWidth * 0.01875);
                 var avatarTargetY = 0;
                 var avatarTarget = new Point(avatarTargetX, avatarTargetY);
 
@@ -113,16 +105,16 @@ namespace devBanner.Logic
                 var subtextTargetX = usernameTarget.X;
                 var subtextTargetY = usernameTarget.Y + fontSizeUsername;
                 var subtextTarget = new PointF(subtextTargetX, subtextTargetY + (fontSizeSubtext / 2f));
-                var subTextWidth = banner.Width - subtextTargetX - (int)(width * 0.01875);
+                var subTextWidth = banner.Width - subtextTargetX - (int)(checkedWidth * 0.01875);
                 var subTextHeight = fontSizeSubtext;
 
-                var devrantTargetX = banner.Width - (int)(width * 0.130);
-                var devrantTargetY = banner.Height - (int)(width * 0.03);
+                var devrantTargetX = banner.Width - (int)(checkedWidth * 0.130);
+                var devrantTargetY = banner.Height - (int)(checkedWidth * 0.03);
                 var devrantTarget = new Point(devrantTargetX, devrantTargetY);
-                
+
                 var backgroundColor = Rgba32.FromHex(profile.Avatar.Background);
                 var foregroundColor = GetForegroundColor(backgroundColor);
-                
+
                 // Draw background
                 banner.SetBGColor(backgroundColor);
 
@@ -148,6 +140,33 @@ namespace devBanner.Logic
             }
 
             return outputFile;
+        }
+
+        /// <summary>
+        /// Check width according to the banner options 
+        /// </summary>
+        /// <returns>A width that is consistant with the min, max, and default width defined in the banner options</returns>
+        private static int CheckWidth(BannerOptions options, int width)
+        {
+            var checkedWidth = 0;
+            if (width <= 0)
+            {
+                checkedWidth = options.DefaultWidth;
+            }
+            else if (width < options.MinWidth)
+            {
+                checkedWidth = options.MinWidth;
+            }
+            else if (width > options.MaxWidth)
+            {
+                checkedWidth = options.MaxWidth;
+            }
+            else
+            {
+                checkedWidth = width;
+            }
+
+            return checkedWidth;
         }
 
         /// <summary>
