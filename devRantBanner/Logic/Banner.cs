@@ -17,12 +17,16 @@ namespace devBanner.Logic
     {
         private const string DevrantAvatarBaseURL = "https://avatars.devrant.com";
 
-        public static async Task<string> GenerateAsync(BannerOptions options, Profile profile, string subtext)
+        public static async Task<string> GenerateAsync(BannerOptions options, Profile profile, string subtext, int width = 800, int height = 192)
         {
             if (profile == null)
             {
                 throw new ArgumentNullException(nameof(profile));
             }
+
+            var checkedWidth = CheckWidth(options, width);
+
+            height = (int)(checkedWidth / options.WidthToHeightRatio);
 
             // Avatar base url + avatar meta = rendered avatar url
             var avatarURL = $"{DevrantAvatarBaseURL}/{profile.Avatar.Image}";
@@ -73,14 +77,14 @@ namespace devBanner.Logic
             }
 
             using (var avatarImage = Image.Load(data))
-            using (var banner = new Image<Rgba32>(800, 192))
+            using (var banner = new Image<Rgba32>(checkedWidth, height))
             {
                 var fontCollection = new FontCollection();
                 fontCollection.Install("fonts/Comfortaa-Regular.ttf");
 
-                var fontSizeUsername = 64;
-                var fontSizeSubtext = fontSizeUsername / 2;
-                var fontSizeDevrant = 16;
+                var fontSizeUsername = (int)(checkedWidth * 0.08);
+                var fontSizeSubtext = (int)(checkedWidth * 0.04);
+                var fontSizeDevrant = (int)(checkedWidth * 0.02);
 
                 var fontUsername = fontCollection.CreateFont("Comfortaa", fontSizeUsername, FontStyle.Bold);
                 var fontSubtext = fontCollection.CreateFont("Comfortaa", fontSizeSubtext, FontStyle.Regular);
@@ -90,7 +94,7 @@ namespace devBanner.Logic
                 var avatarWidth = avatarHeight;
                 var avatarSize = new Size(avatarWidth, avatarHeight);
 
-                var avatarTargetX = 15;
+                var avatarTargetX = (int)(checkedWidth * 0.01875);
                 var avatarTargetY = 0;
                 var avatarTarget = new Point(avatarTargetX, avatarTargetY);
 
@@ -101,16 +105,16 @@ namespace devBanner.Logic
                 var subtextTargetX = usernameTarget.X;
                 var subtextTargetY = usernameTarget.Y + fontSizeUsername;
                 var subtextTarget = new PointF(subtextTargetX, subtextTargetY + (fontSizeSubtext / 2f));
-                var subTextWidth = banner.Width - subtextTargetX - 15;
+                var subTextWidth = banner.Width - subtextTargetX - (int)(checkedWidth * 0.01875);
                 var subTextHeight = fontSizeSubtext;
 
-                var devrantTargetX = banner.Width - 108;
-                var devrantTargetY = banner.Height - 4 - fontSizeDevrant;
+                var devrantTargetX = banner.Width - (int)(checkedWidth * 0.130);
+                var devrantTargetY = banner.Height - (int)(checkedWidth * 0.03);
                 var devrantTarget = new Point(devrantTargetX, devrantTargetY);
-                
+
                 var backgroundColor = Rgba32.FromHex(profile.Avatar.Background);
                 var foregroundColor = GetForegroundColor(backgroundColor);
-                
+
                 // Draw background
                 banner.SetBGColor(backgroundColor);
 
@@ -121,10 +125,10 @@ namespace devBanner.Logic
                 banner.DrawText(profile.Username, fontUsername, foregroundColor, usernameTarget, verticalAlignment: VerticalAlignment.Top);
 
                 // Scale font size to subtext
-                fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight), options.MaxSubtextWidth);
+                fontSubtext = fontSubtext.ScaleToText(subtext, new SizeF(subTextWidth, subTextHeight), subTextWidth);
 
                 // Add subtext word wrapping
-                subtext = subtext.AddWrap(fontSubtext, options.MaxSubtextWidth, options.MaxSubtextWraps);
+                subtext = subtext.AddWrap(fontSubtext, subTextWidth, options.MaxSubtextWraps);
 
                 // Draw subtext
                 banner.DrawText(subtext, fontSubtext, foregroundColor, subtextTarget, verticalAlignment: VerticalAlignment.Top);
@@ -136,6 +140,33 @@ namespace devBanner.Logic
             }
 
             return outputFile;
+        }
+
+        /// <summary>
+        /// Check width according to the banner options 
+        /// </summary>
+        /// <returns>A width that is consistant with the min, max, and default width defined in the banner options</returns>
+        private static int CheckWidth(BannerOptions options, int width)
+        {
+            var checkedWidth = 0;
+            if (width <= 0)
+            {
+                checkedWidth = options.DefaultWidth;
+            }
+            else if (width < options.MinWidth)
+            {
+                checkedWidth = options.MinWidth;
+            }
+            else if (width > options.MaxWidth)
+            {
+                checkedWidth = options.MaxWidth;
+            }
+            else
+            {
+                checkedWidth = width;
+            }
+
+            return checkedWidth;
         }
 
         /// <summary>
