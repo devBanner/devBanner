@@ -23,10 +23,10 @@
 ## Current Features
 - Your own subtext. You can write some lengthy subtext as well!
 - Lightweight. Almost all banners are under 500KB, so no problem downloading and using anywhere!
+- Banner size selection
 
 ## Upcoming Features
 - Improved banner designs
-- Banner size selection
 - Wallpaper support
 
 ## I want one!
