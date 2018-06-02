@@ -82,7 +82,7 @@ namespace devBanner.Logic
                 var fontCollection = new FontCollection();
                 fontCollection.Install("fonts/Comfortaa-Regular.ttf");
 
-                var fontSizeUsername = (int)(checkedWidth * 0.08);
+                var fontSizeUsername = (int)(checkedWidth * 0.07); // original : 0.08
                 var fontSizeSubtext = (int)(checkedWidth * 0.04);
                 var fontSizeDevrant = (int)(checkedWidth * 0.02);
 
@@ -178,7 +178,10 @@ namespace devBanner.Logic
             // Calculating the perceptive luminance - human eye favors green color... Based on http://juicystudio.com/article/luminositycontrastratioalgorithm.php
             double perceptiveLuminance = (0.299 * backgroundColor.R + 0.587 * backgroundColor.G + 0.114 * backgroundColor.B) / 255;
 
-            if (perceptiveLuminance > 0.7) // A lower value will trigger black font faster. (0.65 will trigger black font in light blue bg as well)
+            if (perceptiveLuminance > 1.0) // A lower value will trigger black font faster.
+                // 1.0 : nothing
+                // 0.7 : yellow
+                // 0.65 : light blue
             {
                 return Rgba32.Black; // bright colors --> black font
             }
