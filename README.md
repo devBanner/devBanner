@@ -23,9 +23,11 @@
 ## Current Features
 - Your own subtext. You can write some lengthy subtext as well!
 - Lightweight. Almost all banners are under 500KB, so no problem downloading and using anywhere!
-- Banner size selection
+- Banner size selection (width)
 
 ## Upcoming Features
+- Ability to edit banner component styles (position, font, colors)
+- Social media export
 - Improved banner designs
 - Wallpaper support
 
