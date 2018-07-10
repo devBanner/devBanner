@@ -107,6 +107,8 @@ namespace devBanner.Logic
             var currentWraps = 0;
             var words = text.Split(' ');
 
+            var emptyCharSize = TextMeasurer.Measure(" ", new RendererOptions(font));
+
             foreach (var word in words)
             {
                 var wordSize = TextMeasurer.Measure(word, new RendererOptions(font));
@@ -114,6 +116,7 @@ namespace devBanner.Logic
                 if (wordSize.Width + currentWidth < maxWidth)
                 {
                     currentWidth += wordSize.Width;
+                    currentWidth += emptyCharSize.Width; //We need to add the size of an empty space too
                 }
                 else
                 {

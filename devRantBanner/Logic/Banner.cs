@@ -82,9 +82,9 @@ namespace devBanner.Logic
                 var fontCollection = new FontCollection();
                 fontCollection.Install("fonts/Comfortaa-Regular.ttf");
 
-                var fontSizeUsername = (int)(checkedWidth * 0.07); // original : 0.08
-                var fontSizeSubtext = (int)(checkedWidth * 0.04);
-                var fontSizeDevrant = (int)(checkedWidth * 0.02);
+                var fontSizeUsername = (int)(banner.Width * 0.07); // original : 0.08
+                var fontSizeSubtext = (int)(banner.Width * 0.04);
+                var fontSizeDevrant = (int)(banner.Width * 0.02);
 
                 var fontUsername = fontCollection.CreateFont("Comfortaa", fontSizeUsername, FontStyle.Bold);
                 var fontSubtext = fontCollection.CreateFont("Comfortaa", fontSizeSubtext, FontStyle.Regular);
@@ -94,7 +94,7 @@ namespace devBanner.Logic
                 var avatarWidth = avatarHeight;
                 var avatarSize = new Size(avatarWidth, avatarHeight);
 
-                var avatarTargetX = (int)(checkedWidth * 0.01875);
+                var avatarTargetX = (int)(banner.Width * 0.01875);
                 var avatarTargetY = 0;
                 var avatarTarget = new Point(avatarTargetX, avatarTargetY);
 
@@ -105,11 +105,11 @@ namespace devBanner.Logic
                 var subtextTargetX = usernameTarget.X;
                 var subtextTargetY = usernameTarget.Y + fontSizeUsername;
                 var subtextTarget = new PointF(subtextTargetX, subtextTargetY + (fontSizeSubtext / 2f));
-                var subTextWidth = banner.Width - subtextTargetX - (int)(checkedWidth * 0.01875);
+                var subTextWidth = banner.Width - subtextTargetX - (int)(banner.Width * 0.01875);
                 var subTextHeight = fontSizeSubtext;
 
-                var devrantTargetX = banner.Width - (int)(checkedWidth * 0.130);
-                var devrantTargetY = banner.Height - (int)(checkedWidth * 0.03);
+                var devrantTargetX = banner.Width - (int)(banner.Width * 0.130);
+                var devrantTargetY = banner.Height - (int)(banner.Width * 0.03);
                 var devrantTarget = new Point(devrantTargetX, devrantTargetY);
 
                 var backgroundColor = Rgba32.FromHex(profile.Avatar.Background);
