@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "banner?username=Kimmax&subtext=This%20is%20a%20wonderful%20text&width=2048",
+      "launchUrl": "banner?username={YOUR_USERNAME_HERE}&subtext={YOUR_SUBTEXT_HERE}&width={VALUE OF BETWEEN 128 AND 2048}",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -19,7 +19,7 @@
     "devRantBanner": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "banner?username=Kimmax&subtext=This%20is%20a%20wonderful%20text",
+      "launchUrl": "banner?username={YOUR_USERNAME_HERE}&subtext={YOUR_SUBTEXT_HERE}",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
