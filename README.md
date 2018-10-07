@@ -1,3 +1,7 @@
+### UPDATE
+Before you build the project, you must edit the launchSettings.json file under devRantBanner/Properties.
+
+----
 
 <p align="center"><img src="https://i.imgur.com/fHiT4OO.png"/></p> 
 
